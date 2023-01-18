@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  charging-station-redis:
+    container_name: charging-station-redis
+    build:
+      dockerfile: Dockerfile
+      context: module-domain-redis/redis
+    image: tray1147/charging-station-redis
+    ports:
+      - '6379:6379'
+  charging-station-rds:
+    container_name: charging-station-rds
+    build:
+      dockerfile: Dockerfile
+      context: module-domain-rds/database
+    image: tray1147/charging-station-rds
+    environment:
+      - MYSQL_DATABASE=charging-station
+      - MYSQL_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./module-domain-rds/database/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - '3306:3306'
+

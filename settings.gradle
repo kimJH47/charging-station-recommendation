@@ -1,0 +1,5 @@
+rootProject.name = 'chargingstation'
+
+include 'module-api'
+include 'module-domain-rds'
+include 'module-domain-redis'
